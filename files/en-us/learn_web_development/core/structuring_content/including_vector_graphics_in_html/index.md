@@ -183,6 +183,39 @@ This is definitely not the best method to choose:
 - `iframe`s do have a fallback mechanism, as you can see, but browsers only display the fallback if they lack support for `iframe`s altogether.
 - Moreover, unless the SVG and your current webpage have the same {{glossary('origin')}}, you cannot use JavaScript on your main webpage to manipulate the SVG.
 
+### How to embed an SVG with an `object` element
+
+The {{htmlelement("object")}} element provides another way to embed SVG files in HTML. Like other embedding methods, it allows you to include external SVG files with fallback content. The `<object>` element is a general-purpose embedding element that can handle various content types, including SVG.
+
+Here's how you can use it with an SVG file:
+
+```html
+<object data="triangle.svg" type="image/svg+xml" width="300" height="200">
+  <img src="triangle.png" alt="Triangle with three unequal sides" />
+</object>
+```
+
+The `<object>` element uses the following attributes:
+- `data` — specifies the URL of the SVG file to embed
+- `type` — specifies the MIME type of the content (`image/svg+xml` for SVG files)
+- `width` and `height` — control the dimensions of the embedded content
+
+Any content between the opening and closing `<object>` tags serves as fallback content, displayed if the browser cannot render the SVG or if the SVG file fails to load.
+
+#### Pros
+
+- Provides robust fallback content support — any HTML can be included as fallback.
+- The SVG file can be cached by the browser, improving loading times for subsequent page loads.
+- You can make the embedded SVG into a hyperlink by wrapping the `<object>` in an {{htmlelement("a")}} element.
+- Better semantic meaning than `<iframe>` for embedding graphics.
+
+#### Cons
+
+- You cannot manipulate the SVG content with JavaScript from the parent document due to security restrictions.
+- CSS styles from the parent document cannot affect the embedded SVG content.
+- More verbose syntax compared to the `<img>` element.
+- Limited browser support for some features compared to inline SVG.
+
 ## Playing with SVG
 
 In this exercise we'd like you to have a go at playing with some SVG. Press the **Play** button to open the next example in the MDN Playground and edit it there.
